@@ -8,26 +8,7 @@
 // ##############################################################################################################################
 
 /**
-	 * // Fonction used to return a random number between two given parameters.
-	 * @param {number} min - The minimum value
-	 * @param {number} max - The maximum value
-	 * @param {boolean} integer - Specifies if the result must be an integer or a float
-	 * @returns {number} - Either an int or a float depending on the "integer" boolean value
-	 */
- function randomBetween(min = 0, max = 1, integer = true){
-	max += 1; // So the max is also included in the results
-	return integer ?
-		Math.floor(Math.random() * (max - min)) + min
-		:
-		Math.random() * (max - min) + min
-	;
-};
-
-// 	Used to add a unique number to each class and ID given to the created elements, avoiding conflicts with the CSS.
-let scriptUsage = 0;
-
-/**
- * Script used to generate animated floating objects inside an HTML tag
+ * Generates animated floating objects inside an HTML tag
  * @param {string} htmlTag - The animation's recipient. (ex: "#container", ".box", "section")
  * @param {string} imgPath - The image path name
  * @param {object} settings - Parameters changing the animation's behavior (optional)
@@ -43,9 +24,8 @@ let scriptUsage = 0;
  * @param {boolean} settings.rightOffset - Offset applied to each item from the right of the container
  * @param {boolean} settings.bottomOffset - Offset applied to each item from the bottom of the container
  * @param {boolean} settings.leftOffset - Offset applied to each item from the left of the container
- * @returns {undefined} - Doesn't return anything
  */
-function addFloatingBackgroundObjects(htmlTag, imgPath, settings = {
+const addFloatingBackgroundObjects = (htmlTag, imgPath, settings = {
 	amount : 0,
 	minSize : 8,
 	maxSize : 48,
@@ -58,8 +38,8 @@ function addFloatingBackgroundObjects(htmlTag, imgPath, settings = {
 	rightOffset : 0,
 	bottomOffset : 0,
 	leftOffset : 0,
-}){
-	// Défining default values
+}) => {
+	// Default values
 	if (!settings.amount) settings.amount = 0;
 	if (!settings.minSize) settings.minSize = 8;
 	if (!settings.maxSize) settings.maxSize = 48;
@@ -73,17 +53,32 @@ function addFloatingBackgroundObjects(htmlTag, imgPath, settings = {
 	if (!settings.bottomOffset) settings.bottomOffset = 0;
 	if (!settings.leftOffset) settings.leftOffset = 0;
 
+	/**
+	 * Returns a random number between min and max.
+	 * @param {number} min - The minimum value
+	 * @param {number} max - The maximum value (Not included if float)
+	 * @param {boolean} integer - Specifies if the result must be an integer or a float
+	 * @returns {number} - Either an int or a float depending on the "integer" boolean value
+	 */
+	const randomBetween = (min = 0, max = 1, integer = true) => {
+		return integer ? Math.floor(Math.random() * ((max + 1) - min)) + min : Math.random() * (max - min) + min;
+	};
+
+	/**
+	 * Creates a background animation in the specified html tag
+	 * @param {string} section The html element inside which to apply the background animation
+	 */
 	const createBgAnimation = (section) => {
 		section.style.position = "relative";
 		settings.amount = settings.amount === 0 ? (section.offsetHeight / 100) + 2 : settings.amount;
 
 		const sectionBg = window.getComputedStyle(section, null).getPropertyValue("background-image");
-		if (sectionBg === "none"){
+		if (sectionBg === "none") {
 			sectionBg = window.getComputedStyle(section, null).getPropertyValue("background-color");
 			if (sectionBg === "none") sectionBg = "rgba(0, 0, 0, 0)";
 		};
 
-		const discriminant = new Date().getTime();
+		const discriminant = `${new Date().getTime()}-${randomBetween(1, 9e9)}`;
 
 		const animationContainer = document.createElement("div");
 		animationContainer.classList.add(`animation-container-${discriminant}`);
@@ -96,9 +91,7 @@ function addFloatingBackgroundObjects(htmlTag, imgPath, settings = {
 			right: ${settings.rightOffset};
 			overflow: hidden;
 		`);
-
-		// Définition des styles d'appliquant sur les objets à ajouter
-		let containerContent = `
+		animationContainer.innerHTML = `
 			<style>
 				@keyframes objectStartsLeft-${discriminant} {
 					0% {
@@ -142,38 +135,38 @@ function addFloatingBackgroundObjects(htmlTag, imgPath, settings = {
 					}
 				}
 			</style>
-		`;
-		for (i = 0; i < settings.amount; i++){
-			let marginTop = randomBetween(0, (section.offsetHeight - settings.maxSize));
-			containerContent += `
-				<img class="${imgPath}-${discriminant}" src="${imgPath}" style="
-					position: absolute;
-					height: ${randomBetween(settings.minSize, settings.maxSize)}px;
-					margin-top: ${marginTop}px;
-					animation:
-						${randomBetween(0, 1) === 1 ? `objectStartsLeft-${discriminant}` : `objectStartsRight-${discriminant}`}
-						${randomBetween(settings.minDelay, settings.maxDelay)}s linear infinite,
-						objectMovement${i}-${discriminant} ${randomBetween(3, 5)}s ease-in-out infinite
-					;
-				"
-				alt="${imgPath}">
-				<style>
-					@keyframes objectMovement${i}-${discriminant}{
-						0%{
+			${(() => {
+				const containerContent = [];
+				for (i = 0; i < settings.amount; i++) {
+					const marginTop = randomBetween(0, (section.offsetHeight - settings.maxSize));
+					containerContent.push(`
+						<img class="${i}-${discriminant}" src="${imgPath}" style="
+							position: absolute;
+							height: ${randomBetween(settings.minSize, settings.maxSize)}px;
 							margin-top: ${marginTop}px;
-						}
-						50%{
-							margin-top: ${randomBetween(0, 1) === 1 ? (marginTop - randomBetween(5, 20)) : (marginTop + randomBetween(5, 20))}px;
-						}
-						100%{
-							margin-top: ${marginTop}px;
-						}
-					}
-				</style>
-			`;
-		};
-		// On rajoute le filtre
-		containerContent += `
+							animation:
+								${randomBetween(0, 1) === 1 ? `objectStartsLeft-${discriminant}` : `objectStartsRight-${discriminant}`}
+								${randomBetween(settings.minDelay, settings.maxDelay)}s linear infinite,
+								objectMovement${i}-${discriminant} ${randomBetween(3, 5)}s ease-in-out infinite
+							;
+						" alt="${imgPath}">
+						<style>
+							@keyframes objectMovement${i}-${discriminant}{
+								0%{
+									margin-top: ${marginTop}px;
+								}
+								50%{
+									margin-top: ${randomBetween(0, 1) === 1 ? (marginTop - randomBetween(5, 20)) : (marginTop + randomBetween(5, 20))}px;
+								}
+								100%{
+									margin-top: ${marginTop}px;
+								}
+							}
+						</style>
+					`);
+				};
+				return containerContent;
+			})().join("")}
 			<div class="animation-filter-${discriminant}" style="
 				position: absolute;
 				top: 0;
@@ -184,33 +177,16 @@ function addFloatingBackgroundObjects(htmlTag, imgPath, settings = {
 				opacity: ${settings.filterOpacity}%;
 			"></div>
 		`;
-		animationContainer.innerHTML = containerContent;
 		section.prepend(animationContainer);
 
-		// Replacement de tous les éléments contenus dans la section à l'avant du container de l'animation
+		// Replacing elements inside the container in front of the added animation
 		const sectionChildren = Array.from(section.children);
-		// console.log(sectionChildren);
-
-		// Incrémentation du z-index de tous les enfants de la section
-		for(i = 0; i < sectionChildren.length; i++){
-			// Si l'enfant actuel n'est pas le container de l'animation
-			if (!sectionChildren[i].classList.contains(`animation-container-${discriminant}`)){
-				// console.log(sectionChildren[i]);
-				// Si le z-index n'est pas défini
-				if(window.getComputedStyle(sectionChildren[i], null).getPropertyValue("z-index") === "auto"){
-					sectionChildren[i].style.zIndex = 0;
-				};
-				// On incrémente le z-index
+		for(i = 0; i < sectionChildren.length; i++) {
+			if (!sectionChildren[i].classList.contains(`animation-container-${discriminant}`)) {
+				if (window.getComputedStyle(sectionChildren[i], null).getPropertyValue("z-index") === "auto") sectionChildren[i].style.zIndex = 0;
 				sectionChildren[i].style.zIndex += 1;
-
-				// Si la position de l'enfant est en static ou en relative, on la met en relative par défaut
-				// Sinon, on la met telle qu'elle est initialement
-				let position = window.getComputedStyle(sectionChildren[i], null).getPropertyValue("position");
-				if (position == "static" || position == "relative"){
-					sectionChildren[i].style.position = "relative";
-				} else{
-					sectionChildren[i].style.position = position;
-				}
+				const position = window.getComputedStyle(sectionChildren[i], null).getPropertyValue("position");
+				sectionChildren[i].style.position = (position == "static" || position == "relative") ? "relative" : position;
 			};
 		};
 	};
@@ -222,7 +198,6 @@ function addFloatingBackgroundObjects(htmlTag, imgPath, settings = {
 		createBgAnimation(section);
 	} else{
 		const type = htmlTag.startsWith(".") ? "class" : "tag";
-
 		const sections = Array.from(document.querySelectorAll(htmlTag));
 		if (sections == null || sections.length === 0) throw new Error(`${type} "${htmlTag}" does not exist`);
 
