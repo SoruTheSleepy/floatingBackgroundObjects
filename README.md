@@ -7,7 +7,7 @@ You can also use it with any image you want. Images with transparent background 
 
 This is a remastered version of my very first big JS script so I hope it'll be helpful and/or amusing to use. ^^
 
-You can check out an example of usage [here](https://naorimsenchai.github.io/floatingBackgroundObjects/).
+You can check out an usage's result [here](https://naorimsenchai.github.io/floatingBackgroundObjects/).
 
 ## How to use
 
