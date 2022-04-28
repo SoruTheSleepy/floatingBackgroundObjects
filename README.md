@@ -12,7 +12,7 @@ You can check out an usage's result [here](https://naorimsenchai.github.io/float
 ## How to use
 
 I worked on making this script as easy to use as possible.
-Simply type <b>addFloatingBackgroundObjects(<your html tag>, <your image path>)</b> and poof! Animated background!
+Simply type <b>addFloatingBackgroundObjects(\<your html tag\>, \<your image path\>)</b> and poof! Animated background!
   
 A third argument, an object, allows you to customize your floating items' behavior.
 I recommend downloading the demon version below to have a clue about it.
