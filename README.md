@@ -5,7 +5,7 @@ floatingBackgroundObjects.js is script allowing you to simply add one or more im
 You can use it on any HTML element you want by either referring to its ID, its/their class or simply by its/their tag.
 You can also use it with any image you want. Images with transparent background are, however, recommended for a smoother result.
 
-This is a remastered version of my very first big JS script so I hope it'll be helpful and/or amusing to use. ^^
+This is a remastered version of my very first shared JS script so I hope it'll be helpful and/or amusing to use. ^^
 As it's my first shared work, I'd be really grateful if you could tell me what you think can be improved. :)
 
 You can check out an example of use [here](https://naorimsenchai.github.io/floatingBackgroundObjects/).
