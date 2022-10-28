@@ -1,37 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>floatingBackgroundObject.js</title>
-	<link rel="stylesheet" href="css/style.css">
-	<link rel="icon" href="img/panda-icon.svg">
-</head>
-<!-- DEMO STARTS HERE -->
-<body>
-	<section class="container">
-		<div class="box">
-			<h1>floatingBackgroundObjects.js</h1>
-			<p>by NaorimSenchai</p>
-		</div>
-	</section>
-</body>
-<script src="js/floatingBackgroundObjects.js"></script>
-<script>
-	addFloatingBackgroundObjects(".container", "img/cloud.svg", {
-		minDelay: 80,
-		maxDelay: 120,
-		filterOpacity: 42
-	});
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>floatingBackgroundObject.js</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="img/panda-icon.svg" />
+  </head>
+  <!-- DEMO STARTS HERE -->
+  <body>
+    <section class="container">
+      <div class="box">
+        <h1>floatingBackgroundObjects.js</h1>
+        <p>by NaorimSenchai</p>
+      </div>
+    </section>
+  </body>
+  <script src="js/floatingBackgroundObjects.js"></script>
+  <script>
+    addFloatingBackgroundObjects(".container", "img/cloud.svg", {
+      minDelay: 80,
+      maxDelay: 120,
+      filterOpacity: 42,
+    });
 
-	// When calling the addFloatingBackgroundObjects function more than once on a single container,
-	// remember each call generates a filter that can have influence on your container's appearance.
-	addFloatingBackgroundObjects(".container", "img/panda-icon.svg", {
-		minSize: 80,
-		amount: 1,
-		filterOpacity: 0
-	});
-</script>
-<!-- DEMO ENDS HERE -->
+    // When calling the addFloatingBackgroundObjects function more than once on a single container,
+    // remember each call generates a filter that can have influence on your container's appearance.
+    addFloatingBackgroundObjects(".container", "img/panda-icon.svg", {
+      minSize: 80,
+      amount: 1,
+      filterOpacity: 0,
+    });
+  </script>
+  <!-- DEMO ENDS HERE -->
 </html>

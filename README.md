@@ -2,11 +2,11 @@
 
 floatingBackgroundObjects.js is script allowing you to simply add one or more images floating from left to right or right to left in the background of any div, section, etc. from your page.
 
-You can use it on any HTML element you want by either referring to its ID, its/their class or simply by its/their tag.
+You can use it on any HTML element you want by either referring to its ID, its class or simply by its tag.
 You can also use it with any image you want. Images with transparent background are, however, recommended for a smoother result.
 
-This is a remastered version of my very first big JS script so I hope it'll be helpful and/or amusing to use. ^^
-As it's my first shared work, I'd be really grateful if you could tell me what you think can be improved. :)
+This is a remastered version of my very first shared JS script so I hope it'll be helpful and/or amusing to use. ^^
+I'd be really grateful if you could tell me what you think can be improved/optimized. :)
 
 You can check out an example of use [here](https://naorimsenchai.github.io/floatingBackgroundObjects/).
 
@@ -20,10 +20,9 @@ After downloading the script, put it in your project's directory and import it i
   </section>
 </body>
 <script src="/js/floatingBackgroundObjects.js">
-</html>
 ```
 
-Simply type <b>addFloatingBackgroundObjects(\<your html tag\>, \<your image path\>)</b> and poof! Animated background!
+Simply type <b>addFloatingBackgroundObjects(\<your_html_tag\>, \<your_image_path\>)</b> and poof! Animated background!
 ```html
 <body>
   <section id="s1">
@@ -34,11 +33,10 @@ Simply type <b>addFloatingBackgroundObjects(\<your html tag\>, \<your image path
 <script>
   floatingBackgroundObjects("#s1", 'path/to/image.png');
 </script>
-</html>
 ```
   
 A third argument, an object, allows you to customize your floating items' behavior.
-I recommend downloading the demon version below to get hints about it.
+I recommend downloading the demo version below to get hints about it.
 
 The script comes with some JSDoc in order to complete its accessibility.
 
