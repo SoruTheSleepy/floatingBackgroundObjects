@@ -1,6 +1,6 @@
 // ##############################################################################################################################
 //
-//	Author: NaorimSenchai.
+//	Author: SoruTheSleepy.
 //
 //	Description: Generating animated objects moving from left to right and from right to left
 //				 in the background of any HTML element.
