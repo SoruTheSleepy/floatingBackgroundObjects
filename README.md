@@ -8,7 +8,7 @@ You can also use it with any image you want. Images with transparent background 
 This is a remastered version of my very first shared JS script so I hope it'll be helpful and/or amusing to use. ^^
 I'd be really grateful if you could tell me what you think can be improved/optimized. :)
 
-You can check out an example of use [here](https://SoruTheSleepy.github.io/floatingBackgroundObjects/).
+You can check out an example of use [here](https://SoruTheWhistler.github.io/floatingBackgroundObjects/).
 
 ## How to use
 
